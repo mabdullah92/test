@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^stromengine\.radiandevelopers\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.stromengine\.radiandevelopers\.com$
+RewriteRule ^/?$ "http\:\/\/stromengine\.radiandevelopers\.com\/public\/pe\/" [R=301,L]
+

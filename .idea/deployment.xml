@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="test">
+    <serverData>
+      <paths name="test">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/stromengine" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/stromengine/data" />
+            <excludedPath path="/stromengine/public/assets" />
+            <excludedPath path="/stromengine/public/fonts" />
+            <excludedPath path="/stromengine/config" />
+            <excludedPath path="/stromengine/.settings" />
+            <excludedPath local="true" path="$PROJECT_DIR$/data" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/assets" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/fonts" />
+            <excludedPath local="true" path="$PROJECT_DIR$/public/img" />
+            <excludedPath local="true" path="$PROJECT_DIR$/vendor" />
+            <excludedPath local="true" path="$PROJECT_DIR$/config" />
+            <excludedPath local="true" path="$PROJECT_DIR$/.settings" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
+

@@ -1,0 +1,192 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('Admin Dashboard' . $this->translate(''))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+    <script type="text/javascript">var currentDevice; </script>
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/assets/admin/layout/css/custom.css')
+        ->prependStylesheet($this->basePath() . '/assets/admin/layout/css/themes/default.css')
+        ->prependStylesheet($this->basePath() . '/assets/admin/layout/css/layout.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/css/plugins.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/css/components.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/uniform/css/uniform.default.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/bootstrap/css/bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/simple-line-icons/simple-line-icons.min.css')
+        ->prependStylesheet($this->basePath() . '/assets/global/plugins/font-awesome/css/font-awesome.min.css')
+        ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all')
+    ?>
+    <!-- Scripts -->
+
+</head>
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="index.html">
+                <img src="../assets/admin/layout/img/logo.png" style="margin: 0px" alt="logo" class="logo-default"/>
+            </a>
+
+            <div class="menu-toggler sidebar-toggler hide">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+
+
+                <li class="dropdown dropdown-quick-sidebar-toggler">
+                    <a href="logout.php" class="dropdown-toggle">
+                        <i class="icon-logout"> </i> Logout
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- END TOP NAVIGATION MENU -->
+    </div>
+    <!-- END HEADER INNER -->
+
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <div class="page-sidebar navbar-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+            <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+            <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+            <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                <li class="sidebar-toggler-wrapper">
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler">
+                    </div>
+                    <!-- END SIDEBAR TOGGLER BUTTON -->
+                </li>
+                <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                <li class="sidebar-search-wrapper">
+                    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                    <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                    <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                    <!--     <form class="sidebar-search " action="extra_search.html" method="POST">
+                             <a href="javascript:;" class="remove">
+                                 <i class="icon-close"></i>
+                             </a>
+                             <div class="input-group">
+                                 <input type="text" class="form-control" placeholder="Search...">
+                                 <span class="input-group-btn">
+                                     <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                                 </span>
+                             </div>
+                         </form>-->
+                    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                </li>
+                <li class="start  ">
+                    <a href="#page-dashboard">
+                        <i class="icon-home"></i>
+                        <span class="title">Dashboard</span>
+                        <span class="arrow "></span>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-graph"></i>
+                        <span class="title">Live View</span>
+                        <span class="arrow  open"></span>
+                    </a>
+                    <ul class="sub-menu" style="display: block;">
+                        <li>
+                            <a href="#page-livetemp">
+                                <i class="icon-fire"></i>
+                                Temperature</a>
+                        </li>
+                        <li>
+                            <a href="#page-livehumid">
+                                <i class="icon-drop"></i>
+                                Humidity</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#page-datatables">
+                        <i class=" icon-doc"></i>
+                        <span class="title">Data Tables</span>
+                        <span class="arrow "></span>
+                    </a>
+
+                </li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+    <?php echo $this->content; ?>
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="page-footer-inner">
+        2014 &copy; Farm Monitoring System Dashboard by Radian Developers.
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>
+<!-- END FOOTER -->
+<?php echo $this->headScript()
+    ->prependFile($this->basePath() . 'js/functions.js')
+    ->prependFile($this->basePath() . 'js/ko.pager.js')
+    ->prependFile($this->basePath() . 'js/knockout-3.0.0.js')
+    ->prependFile($this->basePath() . '/assets/admin/pages/scripts/components-pickers.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+    ->prependFile($this->basePath() . '/assets/admin/layout/scripts/demo.js')
+    ->prependFile($this->basePath() . '/assets/admin/layout/scripts/quick-sidebar.js')
+    ->prependFile($this->basePath() . '/assets/admin/layout/scripts/layout.js')
+    ->prependFile($this->basePath() . '/assets/global/scripts/metronic.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/uniform/jquery.uniform.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/jquery.cokie.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/jquery.blockui.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/bootstrap/js/bootstrap.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/jquery-migrate.min.js')
+    ->prependFile($this->basePath() . '/assets/global/plugins/jquery.min.js')
+    ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',)); ?>
+
+</body>
+</html>
