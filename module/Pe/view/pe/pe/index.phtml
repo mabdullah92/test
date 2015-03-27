@@ -1,8 +1,22 @@
-<div data-bind="page: {id: 'page-dashboard',fx: 'slide', sourceOnShow: 'pe/dashboard .page-content-wrapper',role : 'start'}">
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <h3 class="page-title">Farm Monitoring Dashboard
+            <small>Admin Area</small>
+            <select class="select2-highlighted pull-right" id="select_device" name="select_device">
+                <option>Loading ...</option>
+            </select>
+        </h3>
+        <div data-bind="page: {id: 'page-dashboard',fx: 'slide', sourceOnShow: 'pe/dashboard',role : 'start'}">
+        </div>
+        <div data-bind="page: {id: 'page-livetemp',fx: 'slide', sourceOnShow: 'pe/livetemp'}">
+        </div>
+        <div data-bind="page: {id: 'page-livehumid',fx: 'slide', sourceOnShow: 'pe/livehumid'}">
+        </div>
+        <div
+            data-bind="page: {id: 'page-datatables',fx: 'slide',beforeShow:ComponentsPickers.init() ,afterShow:searchTable, sourceOnShow: 'pe/datatables'}">
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
 </div>
-<div data-bind="page: {id: 'page-livetemp',fx: 'slide', sourceOnShow: 'pe/livetemp .page-content-wrapper'}">
-</div>
-<div data-bind="page: {id: 'page-livehumid',fx: 'slide', sourceOnShow: 'pe/livehumid .page-content-wrapper'}">
-</div>
-<div data-bind="page: {id: 'page-datatables',fx: 'slide',beforeShow:ComponentsPickers.init() ,afterShow:searchTable, sourceOnShow: 'pe/datatables .page-content-wrapper'}">
-</div>
+<!-- END CONTENT -->

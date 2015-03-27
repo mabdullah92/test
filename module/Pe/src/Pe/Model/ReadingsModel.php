@@ -18,7 +18,6 @@ class ReadingsModel
         if($param['tdate']!='')
         { $query .=' and u.read_Date <= \''. date(' Y-m-d',strtotime($param['tdate'])).'\'';}
         $data=$dm->createQuery($query)->getResult();
-
         foreach ($data as $row) {
            $d=$row->getread_DateTime()->format('Y/m/d H:i:s');
             $arr["data"][] = array(
@@ -31,17 +30,16 @@ class ReadingsModel
                 "read_Time" => $row->getread_Time()
             );
         }
+        if($data==null){
+            $arr["data"][]=301;
+        }
         $arr["tableName"]="Readings";
         $arr["columns"]=array("Shed Name","Date & Time","Temperature","Humidity");
         $arr=json_encode($arr);
        return $arr;
     }
 
-    public function  stromFind($dm, $data)
-    {
 
-
-    }
 
     public function  stromEdit($dm, $data)
     {

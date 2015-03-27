@@ -151,7 +151,10 @@
         </div>
     </div>
     <!-- END SIDEBAR -->
+
+
     <?php echo $this->content; ?>
+
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
@@ -187,6 +190,5 @@
     ->prependFile($this->basePath() . '/assets/global/plugins/jquery-migrate.min.js')
     ->prependFile($this->basePath() . '/assets/global/plugins/jquery.min.js')
     ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',)); ?>
-
 </body>
 </html>

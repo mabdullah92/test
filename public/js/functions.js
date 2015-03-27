@@ -11,18 +11,38 @@ function searchTable() {
             var JSONobject=data["data"];
             data["data"].forEach(function (JSONObject) {
 
-                    tabledata += "<tr id=" + JSONObject["Id"] + ">";
-                    tabledata += "<td>" + JSONObject["Device_Id"] + "</td>";
-                    tabledata += "<td>" + JSONObject["read_DateTime"] + "</td>";
-                    tabledata += "<td>" + JSONObject["Temperature"] + "</td>";
-                    tabledata += "<td>" + JSONObject["Humidity"] + "</td>";
-                    tabledata += "</tr>";
+                tabledata += "<tr id=" + JSONObject["Id"] + ">";
+                tabledata += "<td>" + JSONObject["Device_Id"] + "</td>";
+                tabledata += "<td>" + JSONObject["read_DateTime"] + "</td>";
+                tabledata += "<td>" + JSONObject["Temperature"] + "</td>";
+                tabledata += "<td>" + JSONObject["Humidity"] + "</td>";
+                tabledata += "</tr>";
             });
             $("#tableData").html(tabledata);
         },
         cache: false
     });
 
+}
+function loadDevices(){
+    var sd;
+    $.ajax({
+        type: "POST",
+        url: 'pe/submit',
+        data: {iamM: "Devices", iamO: "FindDevice"},
+        success:function(data){
+            data = JSON.parse(data);
+            var JSONobject=data;
+            data["devices"].forEach(function (JSONObject) {
+                sd += "<option value=" + JSONObject["Device_Id"] + ">";
+                sd += JSONObject["Device_Loc"] ;
+                sd += "</option>";
+            });
+            $( "select" ).each(function() {
+                $( "select" ).html(sd);
+            });
+        }
+    });
 }
 
 jQuery(document).ready(function () {
@@ -34,8 +54,13 @@ jQuery(document).ready(function () {
 var viewModel = {
     searchTable : function(){
         searchTable();
+
+    },
+    loadDevice:function(){
+        loadDevices();
     }
 };
 pager.extendWithPage(viewModel);
 ko.applyBindings(viewModel, document.getElementById("pager"));
 pager.start();
+window.onload = loadDevices();

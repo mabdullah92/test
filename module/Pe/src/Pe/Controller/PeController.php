@@ -12,8 +12,8 @@ namespace Pe\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Doctrine\ORM\EntityManager;
-use Pe\Entity\Readings;
 use Pe\Model\ReadingsModel;
+use Pe\Model\DevicesModel;
 use Zend\Session\Container;
 
 class PeController extends AbstractActionController
@@ -69,9 +69,15 @@ class PeController extends AbstractActionController
         $class = 'Pe\Model\\' . $data["iamM"] . 'Model';
         $method = 'strom' . $data["iamO"];
         $model = new $class();
-        //$data=array("Temperature"=>10,"Humidity"=>9,"Device_Id"=>1);
         echo $model->$method($dm, $data);
+        return $this->getResponse();
+    }
 
+    public function testAction(){
+        $dm = $this->getDm();
+        $model = new DevicesModel();
+        $data=$model-> stromFindDevice($dm);
+        var_dump($data);
         return $this->getResponse();
     }
 
