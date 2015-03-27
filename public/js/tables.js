@@ -43,3 +43,18 @@ function searchTable() {
     });
 
 }
+
+function plot(){
+    var fdate=$("#date_from").val();
+    var tdate=$("#date_to").val();
+    var device=$("#select_device").val();
+    $.ajax({
+        type: "POST",
+        url: 'pe/submit',
+        data: {iamM: "Readings", iamO: "Charts",fdate:fdate, tdate:tdate, device:device},
+        success:function(data){
+            data = JSON.parse(data);
+            console.log(data);
+        }
+    });
+}

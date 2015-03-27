@@ -50,7 +50,25 @@ class ReadingsModel
     {
 
     }
+    public function  stromCharts($dm,$data)
+    {
+        $param =$data;
+        $query ="select u from Pe\\Entity\\Readings u where u.Device_Id = ".$data["device"];
+        if($param['fdate']!='')
+        { $query .= ' and u.read_Date >= \''. date('Y-m-d',strtotime($param['fdate'])).'\'';}
+        if($param['tdate']!='')
+        { $query .=' and u.read_Date <= \''. date(' Y-m-d',strtotime($param['tdate'])).'\'';};
 
+        $data=$dm->createQuery($query)->getResult();
+        foreach ($data as $row) {
+            $d=strtotime($row->getread_DateTime()->format('Y/m/d H:i:s')) * 1000;
+            $arr[] = array(
+                $row->getHumidity(),$d,
+            );
+        }
+        $arr=json_encode($arr);
+        return $arr;
+    }
     public function  stromCreate($dm,$data)
     {
         date_default_timezone_set('Asia/Karachi');
