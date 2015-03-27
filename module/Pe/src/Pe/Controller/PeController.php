@@ -73,10 +73,11 @@ class PeController extends AbstractActionController
         return $this->getResponse();
     }
 
-    public function testAction(){
+    public function testAction()
+    {
         $dm = $this->getDm();
         $model = new DevicesModel();
-        $data=$model-> stromFindDevice($dm);
+        $data = $model->stromFindDevice($dm);
         var_dump($data);
         return $this->getResponse();
     }
@@ -88,7 +89,40 @@ class PeController extends AbstractActionController
 
     public function dashboardAction()
     {
-        return $this->disableLayout();
+        $tiles="";
+        $arr = array();
+        $dm = $this->getDm();
+        $model = new DevicesModel();
+        $data = $model->stromFindDevice($dm);
+        $data = json_decode($data);
+        foreach($data as $d){
+            $d= json_decode(json_encode($d), true);
+            foreach($d as $s){
+
+                $tiles .='<div id="s'.$s["Device_Id"].'" class="tile double bg-green-meadow" onclick="rmAlert(this);">
+                <div class="tile-body">
+                    <img src="../../assets/admin/pages/media/profile/photo1.png" alt="">
+                    <h4>'.$s["Device_Loc"].'</h4>
+                    <br>
+                    <p style="  font-size:14px;">
+                        Temperature : <span id="s'.$s["Device_Id"].'t">...</span> °C <br>   <br>Relative Humidity : <span id="s'.$s["Device_Id"].'h">...</span> %
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+
+                    </div>
+                    <div class="number">
+                        Status: <span id="s'.$s["Device_Id"].'Status">Controlled Conditions</span>
+                    </div>
+                </div>
+            </div>';
+
+            }
+        }
+        $viewModel = new ViewModel();
+        $viewModel->setVariables(array('tiles' => $tiles))->setTerminal(true);
+        return $viewModel;
     }
 
     public function livetempAction()

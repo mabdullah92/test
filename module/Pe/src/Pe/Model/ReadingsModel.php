@@ -12,9 +12,9 @@ class ReadingsModel
     public function  stromSelectAll($dm,$data)
     {
         $param=$data;
-        $query="select u from Pe\\Entity\\Readings u";
+        $query ="select u from Pe\\Entity\\Readings u where u.Device_Id = ".$data["device"];
         if($param['fdate']!='')
-        { $query .= ' where u.read_Date >= \''. date('Y-m-d',strtotime($param['fdate'])).'\'';}
+        { $query .= ' and u.read_Date >= \''. date('Y-m-d',strtotime($param['fdate'])).'\'';}
         if($param['tdate']!='')
         { $query .=' and u.read_Date <= \''. date(' Y-m-d',strtotime($param['tdate'])).'\'';}
         $data=$dm->createQuery($query)->getResult();
@@ -31,12 +31,12 @@ class ReadingsModel
             );
         }
         if($data==null){
-            $arr["data"][]=301;
+            $arr["data"]=301;
         }
         $arr["tableName"]="Readings";
         $arr["columns"]=array("Shed Name","Date & Time","Temperature","Humidity");
         $arr=json_encode($arr);
-       return $arr;
+        return $arr;
     }
 
 
