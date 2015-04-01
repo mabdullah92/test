@@ -77,7 +77,7 @@ class PeController extends AbstractActionController
     {
         $dm = $this->getDm();
         $model = new ReadingsModel();
-        $data = $model->stromCharts($dm);
+        $data = $model->stromCharts($dm, $data);
         echo $data;
         return $this->getResponse();
     }
@@ -115,6 +115,57 @@ class PeController extends AbstractActionController
                     </div>
                 </div>
             </div>';
+                $tiles .= '<div id="s' . $s["Device_Id"] . '" class="tile double bg-green-meadow" onclick="rmAlert(this);">
+                <div class="tile-body">
+                    <img src="../../assets/admin/pages/media/profile/photo1.png" alt="">
+                    <h4>' . $s["Device_Loc"] . '</h4>
+                    <br>
+                    <p style="  font-size:14px;">
+                        Temperature : <span id="s' . $s["Device_Id"] . 't">...</span> °C <br>   <br>Relative Humidity : <span id="s' . $s["Device_Id"] . 'h">...</span> %
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                    </div>
+                    <div class="number">
+                        Status: <span id="s' . $s["Device_Id"] . 'Status">Controlled Conditions</span>
+                    </div>
+                </div>
+            </div>';
+                $tiles .= '<div id="s' . $s["Device_Id"] . '" class="tile double bg-green-meadow" onclick="rmAlert(this);">
+                <div class="tile-body">
+                    <img src="../../assets/admin/pages/media/profile/photo1.png" alt="">
+                    <h4>' . $s["Device_Loc"] . '</h4>
+                    <br>
+                    <p style="  font-size:14px;">
+                        Temperature : <span id="s' . $s["Device_Id"] . 't">...</span> °C <br>   <br>Relative Humidity : <span id="s' . $s["Device_Id"] . 'h">...</span> %
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                    </div>
+                    <div class="number">
+                        Status: <span id="s' . $s["Device_Id"] . 'Status">Controlled Conditions</span>
+                    </div>
+                </div>
+            </div>';
+                $tiles .= '<div id="s' . $s["Device_Id"] . '" class="tile double bg-green-meadow" onclick="rmAlert(this);">
+                <div class="tile-body">
+                    <img src="../../assets/admin/pages/media/profile/photo1.png" alt="">
+                    <h4>' . $s["Device_Loc"] . '</h4>
+                    <br>
+                    <p style="  font-size:14px;">
+                        Temperature : <span id="s' . $s["Device_Id"] . 't">...</span> °C <br>   <br>Relative Humidity : <span id="s' . $s["Device_Id"] . 'h">...</span> %
+                    </p>
+                </div>
+                <div class="tile-object">
+                    <div class="name">
+                    </div>
+                    <div class="number">
+                        Status: <span id="s' . $s["Device_Id"] . 'Status">Controlled Conditions</span>
+                    </div>
+                </div>
+            </div>';
             }
         }
         $viewModel = new ViewModel();
@@ -122,12 +173,7 @@ class PeController extends AbstractActionController
         return $viewModel;
     }
 
-    public function livetempAction()
-    {
-        return $this->disableLayout();
-    }
-
-    public function livehumidAction()
+    public function liveviewAction()
     {
         return $this->disableLayout();
     }

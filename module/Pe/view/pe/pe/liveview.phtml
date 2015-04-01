@@ -1,0 +1,221 @@
+<div id="empty-liveview">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="index.html">Home</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <a href="#">Live Temprature</a>
+                </li>
+            </ul>
+            <div class="page-toolbar">
+                <!--        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                                Actions <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li>
+                                    <a href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </div>-->
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN CHART PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bar-chart font-green-haze"></i>
+                            <span class="caption-subject bold uppercase font-green-haze"> Shed Monitor</span>
+                            <span class="caption-helper">Temperature and Humidity Plots</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="#portlet-config" data-toggle="modal" class="config">
+                            </a>
+                            <a href="javascript:;" class="reload">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                            <a href="javascript:;" class="remove">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div id="chartdiv" class="chart" style="height: 400px;">
+                        </div>
+                    </div>
+                </div>
+                <!-- END CHART PORTLET-->
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var chartname="ss";
+            var chart; // global
+            var tht;
+            var thh;
+            var device=$("#select_device").val();
+            function chartInit() {
+                $.ajax({
+                    type: "POST",
+                    data: {iamM: "Readings", iamO: "LiveCharts",device: device,live:'false'},
+                    url: 'pe/submit',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        chart.series[0].setData(data["temp"]);
+                        chart.series[1].setData(data["humid"]);
+//                        chart.series[2].setData(data["tht"]);
+//                        chart.series[3].setData(data["thh"]);
+                    },
+                    cache: false
+                    });
+            }
+            $(document).ready(function () {
+                chartInit();
+
+            });
+            function requestData() {
+                $.ajax({
+                    type: "POST",
+                    data: {iamM: "Readings", iamO: "LiveCharts",device: device,live:'true'},
+                    url: 'pe/submit',
+                    success: function (point) {
+                        var series = chart.series[0],
+                            shift = series.data.length > 20; // shift if the series is
+                                                             // longer than 20
+                        // add the point
+                        point =JSON.parse(point);
+                       // console.log(point["temp"][0]);
+                        chart.series[0].addPoint(point["temp"][0], false, shift);
+                        chart.series[1].addPoint(point["humid"][0], true, shift);
+//                        chart.series[2].addPoint(point["tht"], false, shift);
+//                        chart.series[3].addPoint(point["thh"], true, shift);
+                        // call it again after 15 second
+                        setTimeout(requestData, 15000);
+                    },
+                    cache: false
+                });
+            }
+            $(document).on("contextmenu", "#chartdiv", function (e) {
+                e.preventDefault();
+                $(".highcharts-button").trigger("click");
+                return false;
+            });
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart: {
+                        resetZoomButton: {
+                            position: {
+                                // align: 'right', // by default
+                                // verticalAlign: 'top', // by default
+                                x: -60,
+                                y: 5
+                            },
+                            relativeTo: 'chart'
+                        },
+                        backgroundColor: {
+                            linearGradient: [0, 0, 500, 500],
+                            stops: [
+                                [0, 'rgb(255, 250, 250)'],
+                                [1, 'rgb(255, 255, 200)']
+                            ]
+                        },
+                        shadow: true,
+                        renderTo: 'chartdiv',
+                        zoomType: 'x',
+                        panning: true,
+                        panKey: 'shift',
+                        defaultSeriesType: 'spline',
+                        events: {
+                            load: requestData
+                        }
+                    },
+
+                    title: {
+                        text: 'Live Data'
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        maxZoom: 1200 * 1000,
+                        minZoom: 1200 * 1000
+
+                    },
+                    yAxis: {
+                        minPadding: 0.2,
+                        maxPadding: 0.2,
+
+                        title: {
+                            text: 'Readings',
+                            margin: 80
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+
+                    tooltip: {
+                        crosshairs: [true, true]
+                    },
+                    plotOptions: {
+                        series: {
+                            marker: {
+                                radius: 2
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Temperature ( °C )',
+                        color: '#BB3F3F',
+                        data: []
+                    }, {
+                        name: 'Realtive Humidity ( % )',
+                        data: []
+                    }
+//                        , {
+//                            name: 'Temperature Limit',
+//                            color: '#ff0000',
+//                            dashStyle: 'longdashdot',
+//                            data: [],
+//                            enableMouseTracking: false
+//                        }
+//                        , {
+//                            name: 'Humidity Limit',
+//                            color:'#0556a7',
+//                            dashStyle: 'longdashdot',
+//                            data: [],
+//                            enableMouseTracking: false
+//                        }
+                    ],
+                    exporting: {
+                        filename: chartname
+                    }
+                })
+                ;
+            })
+            ;
+
+
+        </script>
+</div>

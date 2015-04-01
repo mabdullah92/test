@@ -1,21 +1,54 @@
-        <div class="page-bar">
-            <ul class="page-breadcrumb">
-                <li>
-                    <i class="fa fa-home"></i>
-                    <a href="index.html">Home</a>
-                    <i class="fa fa-angle-right"></i>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                    <i class="fa fa-angle-right"></i>
-                </li>
-                <li>
-                    <a href="#">Admin Panel</a>
-                </li>
-            </ul>
+<style>
+    ::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+</style>
+<script>
+    function searchDevice() {
+        $('.bg-green-meadow').hide();
+        var txt = $('#search').val();
+        $('.bg-green-meadow:contains("' + txt + '")').show();
+    }
+    ;
+</script>
+<div id="empty-dashboard">
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="index.html">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">Dashboard</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">Admin Panel</a>
+            </li>
+        </ul>
+    </div>
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+    <div class="col-sm-5 pull-right">Loadings ...</div>
+
+    <div class="col-sm-7">
+        <input type="text" onkeyup="searchDevice();" class="form-control input-small" id="search"/>
+        <br/>
+
+        <div class="tiles" style="height: 380px ;overflow-y:scroll; ">
+            <?php echo $tiles; ?>
         </div>
-        <!-- END PAGE HEADER-->
-        <!-- BEGIN PAGE CONTENT-->
-        <div class="tiles" >
-            <?php echo $tiles;?>
-        </div>
+    </div>
+
+</div>

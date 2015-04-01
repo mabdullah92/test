@@ -17,7 +17,7 @@ class ReadingsModel
         { $query .= ' and u.read_Date >= \''. date('Y-m-d',strtotime($param['fdate'])).'\'';}
         if($param['tdate']!='')
         { $query .=' and u.read_Date <= \''. date(' Y-m-d',strtotime($param['tdate'])).'\'';}
-        $data=$dm->createQuery($query)->getResult();
+        $data=$dm->createQuery($query)->setFirstResult($data["offset"])->setMaxResults($data["limit"])->getResult();
         foreach ($data as $row) {
            $d=$row->getread_DateTime()->format('Y/m/d H:i:s');
             $arr["data"][] = array(
@@ -50,20 +50,27 @@ class ReadingsModel
     {
 
     }
-    public function  stromCharts($dm,$data)
+    public function  stromLiveCharts($dm,$data)
     {
         $param =$data;
         $query ="select u from Pe\\Entity\\Readings u where u.Device_Id = ".$data["device"];
-        if($param['fdate']!='')
-        { $query .= ' and u.read_Date >= \''. date('Y-m-d',strtotime($param['fdate'])).'\'';}
-        if($param['tdate']!='')
-        { $query .=' and u.read_Date <= \''. date(' Y-m-d',strtotime($param['tdate'])).'\'';};
-
-        $data=$dm->createQuery($query)->getResult();
+        if($param["live"]=='false'){
+            $query .= ' order by u.Id desc';
+            $limit=1000;
+        }
+        if($param["live"]=='true'){
+            $query .= ' order by u.Id desc';
+            $limit=1;
+        }
+        $query = " select u from Pe\\Entity\\Readings u where u.Device_Id='2' order by u.Id desc";
+        $data=$dm->createQuery($query)->setMaxResults($limit)->getResult();
         foreach ($data as $row) {
             $d=strtotime($row->getread_DateTime()->format('Y/m/d H:i:s')) * 1000;
-            $arr[] = array(
-                $row->getHumidity(),$d,
+            $arr["humid"][] = array(
+                $d,$row->getHumidity()
+            );
+            $arr["temp"][] = array(
+                $d,$row->getTemperature(),
             );
         }
         $arr=json_encode($arr);

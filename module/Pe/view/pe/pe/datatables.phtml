@@ -1,4 +1,5 @@
-
+<!--<link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">-->
+<div id="empty-datatables">
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li>
@@ -78,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 hideOnPlot">
-                                    <button type="button" id="btn_search" onclick="searchTable()" class="btn green btn-block">
+                                    <button type="button" id="btn_search" onclick="$('#tableData').empty();offset=0;searchTable()" class="btn green btn-block">
                                         <i class="fa fa-search"></i> Search
                                     </button>
                                 </div>
@@ -88,15 +89,9 @@
                                     </button>
                                 </div>
                                 <div class="col-md-2 hideOnPlot">
-                                    <button type="button" id="btn_plot" onclick="plot('Humidity');"
+                                    <button type="button" id="btn_plot" onclick="plot();"
                                             class="btn blue-steel btn-block">
-                                        <i class="icon icon-drop"></i> Plot Humidity
-                                    </button>
-                                </div>
-                                <div class="col-md-2 hideOnPlot">
-                                    <button type="button" id="btn_plot" onclick="plot('Temprature');"
-                                            class="btn blue-steel btn-block">
-                                        <i class="glyphicon glyphicon-fire"></i> Plot Temperature
+                                        <i class="fa fa-bar-chart"></i> Plot
                                     </button>
                                 </div>
                                 <div class="col-md-2 showOnPlot" hidden="" id="btn_dataTable">
@@ -106,15 +101,9 @@
                                     </button>
                                 </div>
                                 <div class="col-md-2 showOnPlot" hidden="">
-                                    <button type="button" onclick="plotSelf('Humidity');"
+                                    <button type="button" onclick="plotSelf();"
                                             class="btn blue-steel btn-block">
-                                        <i class="icon icon-drop"></i> Plot Humidity
-                                    </button>
-                                </div>
-                                <div class="col-md-2 showOnPlot" hidden="">
-                                    <button type="button" onclick="plotSelf('Temprature');"
-                                            class="btn blue-steel btn-block">
-                                        <i class="glyphicon glyphicon-fire"></i> Plot Temperature
+                                        <i class="icon icon-drop"></i> Plot
                                     </button>
                                 </div>
                             </div>
@@ -132,10 +121,10 @@
                                     <th>
                                         Date Time
                                     </th>
-                                    <th>
+                                    <th class="numeric">
                                         Temperature
                                     </th>
-                                    <th>
+                                    <th class="numeric">
                                         Humidity
                                     </th>
                                 </tr>
@@ -154,6 +143,9 @@
                 <!-- END EXAMPLE TABLE PORTLET-->
             </div>
         </div>
-
+<!--    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>-->
         <script type="text/javascript" src="js/extable.js"></script>
 <script type="text/javascript" src="js/tables.js"></script>
+
+
+</div>

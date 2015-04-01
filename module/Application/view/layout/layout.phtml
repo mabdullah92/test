@@ -119,29 +119,24 @@
 
                 </li>
                 <li>
-                    <a href="javascript:;">
+                    <a href="#page-liveview">
                         <i class="icon-graph"></i>
                         <span class="title">Live View</span>
-                        <span class="arrow  open"></span>
+                        <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" style="display: block;">
-                        <li>
-                            <a href="#page-livetemp">
-                                <i class="icon-fire"></i>
-                                Temperature</a>
-                        </li>
-                        <li>
-                            <a href="#page-livehumid">
-                                <i class="icon-drop"></i>
-                                Humidity</a>
-                        </li>
-
-                    </ul>
                 </li>
                 <li>
                     <a href="#page-datatables">
                         <i class=" icon-doc"></i>
                         <span class="title">Data Tables</span>
+                        <span class="arrow "></span>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="#page-contact">
+                        <i class="fa fa-phone"></i>
+                        <span class="title">Contact & Support</span>
                         <span class="arrow "></span>
                     </a>
 
@@ -190,5 +185,7 @@
     ->prependFile($this->basePath() . '/assets/global/plugins/jquery-migrate.min.js')
     ->prependFile($this->basePath() . '/assets/global/plugins/jquery.min.js')
     ->prependFile($this->basePath() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9',)); ?>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 </body>
 </html>
